@@ -2,12 +2,13 @@
 ## install
 
 ```bash
-cd ~/.config/nvim
-git clone https://github.com/neswmade/nvim.git
+mv ~/.config/nvim ~/.config/nvim.bak
+git clone https://github.com/neswmade/nvim.git ~/.config/nvim
 ```
 
-## lsp dependencies
+## dependencies
  - lua-language-server
+ - ripgrep
 
 ## to-do
-- fix markdown lsp
+- better lsp
