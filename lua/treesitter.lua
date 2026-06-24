@@ -1,10 +1,10 @@
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "*"
+    pattern = "*",
     callback = function(args)
         local buf = args.buf
         local ft = vim.bo[buf].filetype
 
-        local lang = vim.treesitter.language.get_lang(ft_
+        local lang = vim.treesitter.language.get_lang(ft)
         if not lang then
             return
         end
@@ -14,6 +14,6 @@ vim.api.nvim_create_autocmd("FileType", {
             return
         end
 
-        pcall(vim.treesitter.start, bug, lang)
+        pcall(vim.treesitter.start, buf, lang)
     end,
 })
