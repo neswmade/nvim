@@ -5,6 +5,7 @@ vim.lsp.config("*", { capabilities = capabilities })
 
 -- lua
 vim.lsp.config("lua_ls", {
+    cmd = { "lua-language-server" },
     settings = {
         Lua = {
             diagnostics = { globals = {"vim"} },
