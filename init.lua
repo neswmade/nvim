@@ -3,6 +3,7 @@ require("treesitter")
 
 require("vim._core.ui2").enable({})
 vim.cmd.colorscheme("nesw")
+
 -- load plugins
 vim.pack.add({ 'https://github.com/nvim-mini/mini.files' })
 vim.pack.add({ 'https://github.com/nvim-mini/mini.completion' })
