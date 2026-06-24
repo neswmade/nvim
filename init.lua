@@ -1,16 +1,21 @@
+require("options")
+require("treesitter")
+
 require("vim._core.ui2").enable({})
 
 -- load plugins
 vim.pack.add({ 'https://github.com/nvim-mini/mini.files' })
 vim.pack.add({ 'https://github.com/nvim-mini/mini.completion' })
+vim.pack.add({ 'https://github.com/nvim-mini/mini.notify' })
+vim.pack.add({ 'https://github.com/nvim-mini/mini.cmdline' })
+vim.pack.add({ 'https://github.com/nvim-mini/mini.surround' })
+vim.pack.add({ 'https://github.com/nvim-mini/mini.snippets' })
+vim.pack.add({ 'https://github.com/nvim-mini/mini.pick' })
+vim.pack.add({ 'https://github.com/nvim-mini/mini.extra' })
 
--- lua/ files
-require("options")
-require("treesitter")
-require("keymaps")
-
--- init plugins
-require("mini.files").setup({
+-- initialize plugins
+local MiniFiles = require("mini.files")
+MiniFiles.setup({
     mappings = {
         go_in = "<CR>",
         go_in_plus = "L",
@@ -19,7 +24,13 @@ require("mini.files").setup({
     },
 })
 
-require("mini.completion").setup({
+local MiniNotify = require("mini.notify")
+MiniNotify.setup({
+    content = { format = function(notif) return notif.msg end },
+})
+
+local MiniComplete = require("mini.completion")
+MiniComplete.setup({
     lsp_completion = {
         auto_setup = true,
         process_items = function(items, base)
@@ -29,3 +40,18 @@ require("mini.completion").setup({
         end,
     }
 })
+
+local MiniSnippets = require("mini.snippets")
+MiniSnippets.setup({
+    snippets = { MiniSnippets.gen_loader.from_lang() },
+})
+MiniSnippets.start_lsp_server({ match = false })
+
+require("mini.pick").setup()
+require("mini.extra").setup()
+require("mini.cmdline").setup()
+require("mini.surround").setup()
+
+-- load keymaps and lsp last
+require("keymaps")
+require("lsp")
