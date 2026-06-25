@@ -61,9 +61,7 @@ require("mini.surround").setup()
 
 require("mason").setup()
 
-require("mason-lspconfig").setup({
-    automatic_enable = true,
-})
+require("mason-lspconfig").setup()
 
 -- ensure installed lsps
 require("mason-tool-installer").setup({
@@ -71,8 +69,7 @@ require("mason-tool-installer").setup({
         "lua_ls",
         "stylua",
         "marksman",
-        "taplo",        -- TOML
-        "bash-language-server",
+        "clangd",
     }
 })
 
