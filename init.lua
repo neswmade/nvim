@@ -5,6 +5,12 @@ require("vim._core.ui2").enable({})
 vim.cmd.colorscheme("nesw")
 
 -- load plugins
+vim.pack.add({ 'https://github.com/neovim/nvim-lspconfig' })
+
+vim.pack.add({ 'https://github.com/mason-org/mason.nvim' })
+vim.pack.add({ 'https://github.com/mason-org/mason-lspconfig.nvim' })
+vim.pack.add({ 'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' })
+
 vim.pack.add({ 'https://github.com/nvim-mini/mini.files' })
 vim.pack.add({ 'https://github.com/nvim-mini/mini.completion' })
 vim.pack.add({ 'https://github.com/nvim-mini/mini.notify' })
@@ -53,6 +59,23 @@ require("mini.extra").setup()
 require("mini.cmdline").setup()
 require("mini.surround").setup()
 
--- load keymaps and lsp last
+require("mason").setup()
+
+require("mason-lspconfig").setup({
+    automatic_enable = true,
+})
+
+-- ensure installed lsps
+require("mason-tool-installer").setup({
+    ensure_installed = {
+        "lua_ls",
+        "stylua",
+        "marksman",
+        "taplo",        -- TOML
+        "bash-language-server",
+    }
+})
+
+-- load keymaps and lsp config last
 require("keymaps")
 require("lsp")
