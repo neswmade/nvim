@@ -10,5 +10,17 @@ git clone https://github.com/neswmade/nvim.git ~/.config/nvim
  - ripgrep
  - Monaspace Neon NF (font)
 
+## theme
+
+nesw themes are built in 
+pick one variant in `init.lua`:
+
+- `nesw-dark`
+- `nesw-dark-soft`
+- `nesw-light`
+- `nesw-light-soft`
+
+try colorscheme with `:colorscheme nesw-dark-soft`
+
 ## to-do
 - try and fix markdown, config, toml lsps
