@@ -2,7 +2,9 @@ require("options")
 require("treesitter")
 
 require("vim._core.ui2").enable({})
-vim.cmd.colorscheme("nesw")
+
+-- nesw-dark | nesw-dark-soft | nesw-light | nesw-light-soft
+vim.cmd.colorscheme("nesw-dark")
 
 -- load plugins
 vim.pack.add({ 'https://github.com/neovim/nvim-lspconfig' })
