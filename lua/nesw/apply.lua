@@ -1,5 +1,24 @@
 local M = {}
 
+local function blend(fg, bg, alpha)
+    local function rgb(hex)
+        hex = hex:gsub("#", "")
+        return tonumber(hex:sub(1, 2), 16), tonumber(hex:sub(3, 4), 16), tonumber(hex:sub(5, 6), 16)
+    end
+
+    local fr, fgn, fb = rgb(fg)
+    local br, bgn, bb = rgb(bg)
+    local a = alpha / 255
+    local inv = 1 - a
+
+    return string.format(
+        "#%02x%02x%02x",
+        math.floor(fr * a + br * inv + 0.5),
+        math.floor(fgn * a + bgn * inv + 0.5),
+        math.floor(fb * a + bb * inv + 0.5)
+    )
+end
+
 local function hl(group, opts)
     vim.api.nvim_set_hl(0, group, opts)
 end
@@ -124,10 +143,10 @@ function M.setup(palette)
     hl("SpellRare", { undercurl = true, sp = d.hint })
 
     -- diff
-    hl("DiffAdd", { bg = g.add .. "33" })
-    hl("DiffChange", { bg = g.modify .. "33" })
-    hl("DiffDelete", { bg = g.delete .. "33" })
-    hl("DiffText", { bg = g.modify .. "66" })
+    hl("DiffAdd", { bg = blend(g.add, u.bg, 0x33) })
+    hl("DiffChange", { bg = blend(g.modify, u.bg, 0x33) })
+    hl("DiffDelete", { bg = blend(g.delete, u.bg, 0x33) })
+    hl("DiffText", { bg = blend(g.modify, u.bg, 0x66) })
 
     -- messages
     hl("Error", { fg = d.error, bg = u.bg })
